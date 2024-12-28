@@ -8,17 +8,34 @@ interface Props {
 const { character } = Astro.props;
 ---
 
-<div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-8">
-  <h1 class="text-3xl font-bold mb-6">{character.name}</h1>
+<div
+  class="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-8"
+>
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold dark:text-white">{character.name}</h1>
+    <button
+      id="toggleJson"
+      class="bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-md"
+    >
+      Show Raw JSON
+    </button>
+  </div>
+
+  <div id="jsonView" class="hidden mb-8">
+    <pre
+      class="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg overflow-auto dark:text-gray-200">
+      {JSON.stringify(character, null, 2)}
+    </pre>
+  </div>
 
   <!-- Bio Section -->
   {
     character.bio && character.bio.length > 0 && (
       <section class="mb-8">
-        <h2 class="text-xl font-semibold mb-4">Bio</h2>
+        <h2 class="text-xl font-semibold mb-4 dark:text-white">Bio</h2>
         <ul class="space-y-2">
           {character.bio.map((line) => (
-            <li class="text-gray-700">{line}</li>
+            <li class="text-gray-700 dark:text-gray-300">{line}</li>
           ))}
         </ul>
       </section>
@@ -29,10 +46,10 @@ const { character } = Astro.props;
   {
     character.lore && character.lore.length > 0 && (
       <section class="mb-8">
-        <h2 class="text-xl font-semibold mb-4">Lore</h2>
+        <h2 class="text-xl font-semibold mb-4 dark:text-white">Lore</h2>
         <ul class="space-y-2">
           {character.lore.map((line) => (
-            <li class="text-gray-700">{line}</li>
+            <li class="text-gray-700 dark:text-gray-300">{line}</li>
           ))}
         </ul>
       </section>
@@ -43,10 +60,10 @@ const { character } = Astro.props;
   {
     character.knowledge && character.knowledge.length > 0 && (
       <section class="mb-8">
-        <h2 class="text-xl font-semibold mb-4">Knowledge</h2>
+        <h2 class="text-xl font-semibold mb-4 dark:text-white">Knowledge</h2>
         <div class="flex flex-wrap gap-2">
           {character.knowledge.map((item) => (
-            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full">
+            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full">
               {item}
             </span>
           ))}
@@ -59,34 +76,34 @@ const { character } = Astro.props;
   {
     character.style && (
       <section class="mb-8">
-        <h2 class="text-xl font-semibold mb-4">Style</h2>
+        <h2 class="text-xl font-semibold mb-4 dark:text-white">Style</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           {character.style.all && character.style.all.length > 0 && (
             <div>
-              <h3 class="font-medium mb-2">General</h3>
+              <h3 class="font-medium mb-2 dark:text-gray-200">General</h3>
               <ul class="space-y-1">
                 {character.style.all.map((style) => (
-                  <li class="text-gray-700">{style}</li>
+                  <li class="text-gray-700 dark:text-gray-300">{style}</li>
                 ))}
               </ul>
             </div>
           )}
           {character.style.chat && character.style.chat.length > 0 && (
             <div>
-              <h3 class="font-medium mb-2">Chat</h3>
+              <h3 class="font-medium mb-2 dark:text-gray-200">Chat</h3>
               <ul class="space-y-1">
                 {character.style.chat.map((style) => (
-                  <li class="text-gray-700">{style}</li>
+                  <li class="text-gray-700 dark:text-gray-300">{style}</li>
                 ))}
               </ul>
             </div>
           )}
           {character.style.post && character.style.post.length > 0 && (
             <div>
-              <h3 class="font-medium mb-2">Post</h3>
+              <h3 class="font-medium mb-2 dark:text-gray-200">Post</h3>
               <ul class="space-y-1">
                 {character.style.post.map((style) => (
-                  <li class="text-gray-700">{style}</li>
+                  <li class="text-gray-700 dark:text-gray-300">{style}</li>
                 ))}
               </ul>
             </div>
@@ -100,16 +117,22 @@ const { character } = Astro.props;
   {
     character.messageExamples && character.messageExamples.length > 0 && (
       <section class="mb-8">
-        <h2 class="text-xl font-semibold mb-4">Message Examples</h2>
+        <h2 class="text-xl font-semibold mb-4 dark:text-white">
+          Message Examples
+        </h2>
         <div class="space-y-6">
           {character.messageExamples.map((conversation) => (
-            <div class="border rounded-lg p-4">
+            <div class="border dark:border-gray-700 rounded-lg p-4">
               {conversation.map((message) => (
                 <div
                   class={`mb-4 ${message.user === character.name ? "pl-4" : ""}`}
                 >
-                  <div class="font-medium mb-1">{message.user}</div>
-                  <div class="text-gray-700">{message.content.text}</div>
+                  <div class="font-medium mb-1 dark:text-gray-200">
+                    {message.user}
+                  </div>
+                  <div class="text-gray-700 dark:text-gray-300">
+                    {message.content.text}
+                  </div>
                 </div>
               ))}
             </div>
@@ -119,3 +142,19 @@ const { character } = Astro.props;
     )
   }
 </div>
+
+<script>
+  const toggleButton = document.getElementById("toggleJson");
+  const jsonView = document.getElementById("jsonView");
+
+  toggleButton?.addEventListener("click", () => {
+    const isHidden = jsonView?.classList.contains("hidden");
+    if (isHidden) {
+      jsonView?.classList.remove("hidden");
+      toggleButton.textContent = "Hide Raw JSON";
+    } else {
+      jsonView?.classList.add("hidden");
+      toggleButton.textContent = "Show Raw JSON";
+    }
+  });
+</script>

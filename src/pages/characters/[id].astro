@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import CharacterDetail from "../../components/CharacterDetail.astro";
 import { getAllCharacters } from "../../utils/characters";
 import type { Character } from "../../types/character";
+import Header from "../../components/Header.astro";
 
 export async function getStaticPaths() {
   const characters = await getAllCharacters();
@@ -30,7 +31,10 @@ if (!character) {
 ---
 
 <Layout title={`${character.name} - AI Character Database`}>
-  <main class="container mx-auto px-4 py-8">
-    <CharacterDetail character={character} />
+  <main>
+    <Header />
+    <div class="container mx-auto px-4 py-8">
+      <CharacterDetail character={character} />
+    </div>
   </main>
 </Layout>

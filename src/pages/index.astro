@@ -2,15 +2,16 @@
 import Layout from "../layouts/Layout.astro";
 import CharacterList from "../components/CharacterList.astro";
 import { getAllCharacters } from "../utils/characters";
+import Header from "../components/Header.astro";
 
 const characters = (await getAllCharacters()).filter((char) => char != null);
 ---
 
-<Layout title="AI Character Database">
-  <main class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-8">
-      Eliza Characters Database ({characters.length} Characters)
-    </h1>
-    <CharacterList characters={characters} />
+<Layout title="Eliza Characters Database">
+  <main>
+    <Header />
+    <div class="container mx-auto px-4 py-8">
+      <CharacterList characters={characters} />
+    </div>
   </main>
 </Layout>
