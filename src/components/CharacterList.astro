@@ -1,0 +1,16 @@
+---
+import type { Character } from '../types/character';
+import CharacterCard from './CharacterCard.astro';
+
+interface Props {
+  characters: Character[];
+}
+
+const { characters } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {characters.map((character) => (
+    <CharacterCard character={character} />
+  ))}
+</div>

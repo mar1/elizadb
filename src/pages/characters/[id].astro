@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CharacterDetail from "../../components/CharacterDetail.astro";
+import { getAllCharacters } from "../../utils/characters";
+import type { Character } from "../../types/character";
+
+export async function getStaticPaths() {
+  const characters = await getAllCharacters();
+
+  return characters.map((character) => ({
+    params: { id: character.id },
+    props: { character },
+  }));
+}
+
+interface Props {
+  character: Character;
+}
+
+const { character } = Astro.props;
+
+// Add 404 handling
+if (!character) {
+  return Astro.redirect("/404");
+}
+---
+
+<Layout title={`${character.name} - AI Character Database`}>
+  <main class="container mx-auto px-4 py-8">
+    <CharacterDetail character={character} />
+  </main>
+</Layout>

@@ -1,0 +1,93 @@
+---
+import type { Character } from '../types/character';
+
+interface Props {
+  character: Character;
+}
+
+const { character } = Astro.props;
+---
+
+<div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-8">
+  <h1 class="text-3xl font-bold mb-6">{character.name}</h1>
+
+  <!-- Bio Section -->
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-4">Bio</h2>
+    <ul class="space-y-2">
+      {character.bio.map((line) => (
+        <li class="text-gray-700">{line}</li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Lore Section -->
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-4">Lore</h2>
+    <ul class="space-y-2">
+      {character.lore.map((line) => (
+        <li class="text-gray-700">{line}</li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Knowledge Section -->
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-4">Knowledge</h2>
+    <div class="flex flex-wrap gap-2">
+      {character.knowledge.map((item) => (
+        <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full">
+          {item}
+        </span>
+      ))}
+    </div>
+  </section>
+
+  <!-- Style Section -->
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-4">Style</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <h3 class="font-medium mb-2">General</h3>
+        <ul class="space-y-1">
+          {character.style.all.map((style) => (
+            <li class="text-gray-700">{style}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-medium mb-2">Chat</h3>
+        <ul class="space-y-1">
+          {character.style.chat.map((style) => (
+            <li class="text-gray-700">{style}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-medium mb-2">Post</h3>
+        <ul class="space-y-1">
+          {character.style.post.map((style) => (
+            <li class="text-gray-700">{style}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Message Examples Section -->
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-4">Message Examples</h2>
+    <div class="space-y-6">
+      {character.messageExamples.map((conversation) => (
+        <div class="border rounded-lg p-4">
+          {conversation.map((message) => (
+            <div class={`mb-4 ${message.user === character.name ? 'pl-4' : ''}`}>
+              <div class="font-medium mb-1">{message.user}</div>
+              <div class="text-gray-700">{message.content.text}</div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  </section>
+</div>
