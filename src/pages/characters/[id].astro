@@ -7,6 +7,10 @@ import type { Character } from "../../types/character";
 export async function getStaticPaths() {
   const characters = await getAllCharacters();
 
+  if (!characters || !Array.isArray(characters)) {
+    throw new Error("Failed to fetch characters data");
+  }
+
   return characters.map((character) => ({
     params: { id: character.id },
     props: { character },

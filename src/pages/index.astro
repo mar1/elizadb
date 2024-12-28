@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import CharacterList from "../components/CharacterList.astro";
 import { getAllCharacters } from "../utils/characters";
 
-const characters = await getAllCharacters();
+const characters = (await getAllCharacters()).filter((char) => char != null);
 ---
 
 <Layout title="AI Character Database">
