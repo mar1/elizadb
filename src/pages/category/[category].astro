@@ -1,0 +1,43 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CharacterList from "../../components/CharacterList.astro";
+import FilterBar from "../../components/FilterBar.astro";
+import { getAllCharacters } from "../../utils/characters";
+import Header from "../../components/Header.astro";
+
+export async function getStaticPaths() {
+    const categories = [
+        "fictional-characters",
+        "video-games",
+        "historical-figures",
+        "pop-culture-icons",
+    ];
+
+    return categories.map((category) => ({
+        params: { category },
+        props: {
+            category,
+            prettyCategory: category
+                .split("-")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" "),
+        },
+    }));
+}
+
+const { category, prettyCategory } = Astro.props;
+
+const characters = (await getAllCharacters())
+    .filter((char) => char != null)
+    .filter(
+        (char) => char.category.toLowerCase().replace(/\s+/g, "-") === category,
+    );
+---
+
+<Layout>
+    <Header />
+    <main class="container mx-auto px-4 py-8">
+        <FilterBar activeCategory={prettyCategory} />
+        <CharacterList characters={characters} />
+    </main>
+</Layout>

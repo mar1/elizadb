@@ -1,6 +1,10 @@
+export type CharacterCategory = 'Fictional Characters' | 'Video Games' | 'Historical Figures' | 'Pop Culture Icons';
+
 export interface Character {
   id: string;
   name: string;
+  category: CharacterCategory;
+  dateAdded: string; // ISO date string
   clients: string[];
   modelProvider: string;
   settings: {

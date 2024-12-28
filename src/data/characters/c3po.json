@@ -1,6 +1,8 @@
 {
     "id": "c3po",
     "name": "C-3PO",
+    "category": "Fictional Characters",
+    "dateAdded": "2024-12-28T12:00:00Z",
     "clients": [],
     "modelProvider": "anthropic",
     "settings": {

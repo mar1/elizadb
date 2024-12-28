@@ -15,7 +15,11 @@ export async function getAllCharacters(): Promise<Character[]> {
 
     const characters = Object.values(characterModules) as Character[];
     console.log(`Found ${characters.length} characters`);
-    return characters;
+
+    // Sort by date added by default
+    return characters.sort((a, b) =>
+      new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime()
+    );
   } catch (error) {
     console.error('Error loading characters:', error);
     return [];

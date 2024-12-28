@@ -42,6 +42,22 @@ const { character } = Astro.props;
     )
   }
 
+  <!-- Adjectives Section -->
+  {
+    character.adjectives && character.adjectives.length > 0 && (
+      <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4 dark:text-white">Traits</h2>
+        <div class="flex flex-wrap gap-2">
+          {character.adjectives.map((adj) => (
+            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 px-2 py-1 rounded-full">
+              {adj}
+            </span>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
   <!-- Lore Section -->
   {
     character.lore && character.lore.length > 0 && (

@@ -1,0 +1,41 @@
+---
+export interface Props {
+    activeCategory: string | null;
+}
+
+const { activeCategory } = Astro.props;
+
+const categories = [
+    "All",
+    "Fictional Characters",
+    "Video Games",
+    "Historical Figures",
+    "Pop Culture Icons",
+];
+---
+
+<div class="mb-8 space-y-4">
+    <div class="flex justify-between items-center">
+        <div class="space-x-2">
+            {
+                categories.map((category) => (
+                    <a
+                        href={
+                            category === "All"
+                                ? `${import.meta.env.BASE_URL}/`
+                                : `${import.meta.env.BASE_URL}/category/${category.toLowerCase().replace(/\s+/g, "-")}`
+                        }
+                        class={`px-4 py-2 rounded-full ${
+                            (category === "All" && !activeCategory) ||
+                            category === activeCategory
+                                ? "bg-blue-500 text-white"
+                                : "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600"
+                        }`}
+                    >
+                        {category}
+                    </a>
+                ))
+            }
+        </div>
+    </div>
+</div>

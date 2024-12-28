@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CharacterList from "../components/CharacterList.astro";
+import FilterBar from "../components/FilterBar.astro";
+import { getAllCharacters } from "../utils/characters";
+import Header from "../components/Header.astro";
+
+const characters = (await getAllCharacters())
+    .filter((char) => char != null)
+    .sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<Layout>
+    <Header />
+    <main class="container mx-auto px-4 py-8">
+        <FilterBar activeCategory={null} sortBy="name" />
+        <CharacterList characters={characters} />
+    </main>
+</Layout>
