@@ -26,9 +26,9 @@ export async function getAllCharacters(): Promise<Character[]> {
 
     console.log(`Found ${characters.length} characters`);
 
-    // Sort by date added by default
+    // Sort alphabetically by name by default
     return characters.sort((a, b) =>
-      new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime()
+      a.name.localeCompare(b.name)
     );
   } catch (error) {
     console.error('Error loading characters:', error);
