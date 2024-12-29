@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import CharacterList from "../components/CharacterList.astro";
 import FilterBar from "../components/FilterBar.astro";
+import Search from "../components/Search.astro";
 import { getAllCharacters } from "../utils/characters";
 import Header from "../components/Header.astro";
 
@@ -11,7 +12,19 @@ const characters = (await getAllCharacters()).filter((char) => char != null);
 <Layout>
   <Header />
   <main class="container mx-auto px-4 py-8">
-    <FilterBar activeCategory={null} />
+    <div class="flex items-center gap-4 mb-6">
+      <div class="flex-1">
+        <FilterBar activeCategory={null} />
+      </div>
+      <div class="w-64">
+        <Search />
+      </div>
+    </div>
     <CharacterList characters={characters} />
   </main>
 </Layout>
+
+<script define:vars={{ characters }}>
+  // Make characters available to the client-side search
+  window.__CHARACTERS_DATA__ = characters;
+</script>

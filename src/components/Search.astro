@@ -1,0 +1,57 @@
+---
+
+---
+
+<div class="relative">
+    <input
+        type="text"
+        id="search-input"
+        placeholder="Search characters..."
+        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500
+               bg-white dark:bg-gray-800
+               text-gray-900 dark:text-gray-100
+               border-gray-300 dark:border-gray-700
+               placeholder-gray-500 dark:placeholder-gray-400"
+    />
+</div>
+
+<script>
+    import Fuse from "fuse.js";
+
+    // Get all characters from the page
+    const characters = window.__CHARACTERS_DATA__ || [];
+
+    // Configure Fuse.js
+    const fuse = new Fuse(characters, {
+        keys: ["name"],
+        threshold: 0.4,
+    });
+
+    // Get DOM elements
+    const searchInput = document.getElementById("search-input");
+    const characterList = document.querySelector(".character-list"); // Add this class to your CharacterList component
+
+    searchInput?.addEventListener("input", (e) => {
+        const value = (e.target as HTMLInputElement).value;
+
+        if (!value) {
+            // If search is empty, show all characters
+            document.querySelectorAll(".character-item").forEach((item) => {
+                (item as HTMLElement).style.display = "block";
+            });
+            return;
+        }
+
+        // Search and filter
+        const results = fuse.search(value);
+        const matchedIds = new Set(results.map((result) => result.item.id));
+
+        // Hide/show characters based on search
+        document.querySelectorAll(".character-item").forEach((item) => {
+            const id = item.getAttribute("data-id");
+            (item as HTMLElement).style.display = matchedIds.has(id)
+                ? "block"
+                : "none";
+        });
+    });
+</script>
