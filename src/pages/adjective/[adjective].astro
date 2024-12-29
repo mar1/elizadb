@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CharacterList from "../../components/CharacterList.astro";
+import { getAllCharacters } from "../../utils/characters";
+import Header from "../../components/Header.astro";
+
+export async function getStaticPaths() {
+    const characters = await getAllCharacters();
+
+    // Get all unique adjectives
+    const adjectives = new Set(
+        characters.flatMap((char) => char.adjectives || []),
+    );
+
+    return Array.from(adjectives).map((adjective) => ({
+        params: { adjective: adjective.toLowerCase().replace(/\s+/g, "-") },
+        props: { adjective, characters },
+    }));
+}
+
+const { adjective } = Astro.params;
+const { characters } = Astro.props;
+
+// Filter characters by adjective
+const filteredCharacters = characters.filter((char) =>
+    char.adjectives?.some(
+        (adj) =>
+            adj.toLowerCase() === adjective.replace(/-/g, " ").toLowerCase(),
+    ),
+);
+
+const formattedAdjective = adjective
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+---
+
+<Layout title={`Characters - ${formattedAdjective}`}>
+    <Header />
+    <div class="container mx-auto px-4 py-8">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold mb-2 dark:text-white">
+                Characters tagged with "{formattedAdjective}"
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400">
+                Found {filteredCharacters.length} character{
+                    filteredCharacters.length !== 1 ? "s" : ""
+                }
+            </p>
+        </div>
+        <CharacterList characters={filteredCharacters} />
+    </div>
+</Layout>
