@@ -13,7 +13,17 @@ export async function getAllCharacters(): Promise<Character[]> {
       return [];
     }
 
-    const characters = Object.values(characterModules) as Character[];
+    const characters = Object.values(characterModules)
+      .filter((char: any) => {
+        // Filter out template and invalid characters
+        if (!char || typeof char !== 'object') return false;
+        if (!char.id || char.id === '') return false;
+
+        // Get the filename from the module path
+        const path = Object.keys(characterModules).find(key => characterModules[key] === char) || '';
+        return !path.includes('TEMPLATE.json');
+      }) as Character[];
+
     console.log(`Found ${characters.length} characters`);
 
     // Sort by date added by default
