@@ -1,0 +1,53 @@
+/* Base colors and variables */
+:root {
+    --primary-blue: #4361ee;
+    --primary-hover: #3a56d4;
+    --background-light: #f8fafc;
+    --card-light: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+}
+
+/* Global styles */
+body {
+    background-color: var(--background-light);
+    color: var(--text-primary);
+}
+
+/* Card styling */
+.character-card {
+    background-color: var(--card-light);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.character-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Tag/badge styling */
+.tag {
+    background-color: #eef2ff;
+    color: var(--primary-blue);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+}
