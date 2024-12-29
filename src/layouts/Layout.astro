@@ -8,9 +8,21 @@ import Footer from "../components/Footer.astro";
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href={`${import.meta.env.BASE_URL}/apple-touch-icon.png`}
+		/>
+		<link
 			rel="icon"
-			type="image/svg+xml"
-			href={`${import.meta.env.BASE_URL}/favicon.svg`}
+			type="image/png"
+			sizes="32x32"
+			href={`${import.meta.env.BASE_URL}/favicon-32x32.png`}
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href={`${import.meta.env.BASE_URL}/favicon-16x16.png`}
 		/>
 		<meta name="generator" content={Astro.generator} />
 		<title>Eliza Characters Database</title>
