@@ -1,48 +1,134 @@
-# Astro Starter Kit: Basics
+# 🤖 ElizaDB - AI Character Configuration for ElizaOS
 
-```sh
-npm create astro@latest -- --template basics
+A specialized character configuration database designed for [ElizaOS](https://github.com/elizaOS/eliza/), the autonomous agent framework. This project provides a structured database of character definitions that can be directly used with ElizaOS to create sophisticated AI agents.
+
+## 🌟 Features
+
+- **Rich Character Profiles**: Detailed character information including:
+  - Biographical information
+  - Personality traits
+  - Knowledge base
+  - Communication style
+  - Message examples
+  - Voice settings
+
+- **Advanced Browsing**:
+  - Category-based filtering
+  - Real-time search functionality
+  - Responsive grid layout
+  - Dark/Light mode support
+
+- **Categories**:
+  - Fictional Characters
+  - Video Games
+  - Historical Figures
+  - Pop Culture Icons
+
+## 🚀 Quick Start
+
+1. **Prerequisites**
+
+```bash
+# Ensure you have ElizaOS installed first
+git clone https://github.com/elizaOS/eliza.git
+cd eliza
+pnpm i && pnpm build
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+2. **Using Character Files**
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+```bash
+# Start ElizaOS with a custom character
+pnpm start --characters="path/to/your/character.json"
+```
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 📖 Character Structure for ElizaOS
 
-## 🚀 Project Structure
+Characters are defined in JSON format compatible with ElizaOS specifications:
 
-Inside of your Astro project, you'll see the following folders and files:
+```json
+{
+  "id": "unique-character-id",
+  "name": "Character Name",
+  "category": "Category",
+  "clients": ["twitter", "discord"],  // ElizaOS supported clients
+  "modelProvider": "provider-name",
+  "settings": {
+    "voice": {
+      "model": "voice-model-id"
+    }
+  },
+  "bio": ["Biography lines"],
+  "knowledge": ["Areas of expertise"],
+  "style": {
+    "all": ["General style traits"],
+    "chat": ["Chat-specific style"],
+    "post": ["Post-specific style"]
+  },
+  "adjectives": ["Trait1", "Trait2"]
+}
+```
+
+## 🔧 Integration with ElizaOS
+
+1. Place your character files in the ElizaOS project structure:
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+eliza/
+├── characters/
+│   └── your-character.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+2. Load multiple characters:
 
-## 🧞 Commands
+```bash
+pnpm start --characters="characters/character1.json,characters/character2.json"
+```
 
-All commands are run from the root of the project, from a terminal:
+## 🤝 Contributing Guidelines
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### Character Contributions
 
-## 👀 Want to learn more?
+1. Fork the repository
+2. Create a new branch: `git checkout -b character/your-character-name`
+3. Add your character JSON file to `characters/`
+4. Test with ElizaOS using: `pnpm test:character your-character.json`
+5. Submit a pull request with:
+   - Character description
+   - Test results
+   - Use case examples
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Code Contributions
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Commit changes: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin feature/your-feature`
+5. Open a pull request
+
+## 🛠️ Tech Stack
+
+- [Astro](https://astro.build) - Static Site Generator
+- [Tailwind CSS](https://tailwindcss.com) - Styling
+- [TypeScript](https://www.typescriptlang.org/) - Type Safety
+- [Fuse.js](https://fusejs.io/) - Search Functionality
+
+## 📝 License
+
+This project is licensed under the MIT License
+
+## 👥 Authors
+
+- **Lead Maintainer**: [mar1dev](https://github.com/mar1dev)
+- **Contributors**: [View all contributors](https://github.com/elizaOS/elizadb/graphs/contributors)
+
+## 🌟 Eliza Community
+
+- 📫 [Join the Eliza Discord](https://discord.gg/elizaos)
+- 🐦 [Follow Eliza on Twitter](https://twitter.com/elizaOS)
+- 📝 [Read Eliza's Blog](https://elizaos.com/blog)
+- 🌟 [Star Eliza on GitHub](https://github.com/elizaOS/eliza)
+
+---
+
+Built for the ElizaOS Autonomous Agent Framework 🤖
